@@ -1,5 +1,6 @@
 import random
 
+## Just a printing function so see the contents of the bag
 def utility_print(b):
     print("Generated bags:")
     for key, val in b.items():
@@ -7,18 +8,21 @@ def utility_print(b):
         print(stmnt)
         stmnt = ""
 
-
+## Random bag generator that creates 10 bags ("1", "2", etc) with a coin weight of 1 or 1.1
+## only 1 bag contains coins of weight 1.1g, the other 9 have 1g 
 def generate_bags():
     x = random.randrange(1, 11)
     bags = {}
     for i in range(1, 11):
         if (i == x):
             bags[i] = float(1.1)
-            # bags["fake"] = x
         else: bags[i] = 1
     utility_print(bags)
     return bags 
 
+## coin selector alg that iterates over the bags and selects n coins from the nth bag
+## where n is from 1...10. Eg: 1 coin from bag 1, 2 from bag "2", 3 from bag "3", etc
+## Returns the list of coins to weigh
 def select_coins(b): 
     coins_to_weigh = []
     for i in range(1, 11):
@@ -29,6 +33,9 @@ def select_coins(b):
     print(coins_to_weigh)
     return coins_to_weigh
 
+## Sums the weights in the passed list. If all coins were real (@ 1 g), then the total weight 
+## should be 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10 = 55. Therefore, the  (sum - 55) * 10
+## is the index of the bag with fake coins.
 def weigh_and_determine(s):
     sum = float(0)
     for lst in s:
